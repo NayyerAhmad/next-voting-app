@@ -43,14 +43,14 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="container mx-auto text-center">
-      <h1 className="text-3xl mb-4">Cast Your Vote</h1>
+    <div className="container mx-auto p-8">
+      <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Cast Your Vote</h1>
       {options.length === 0 && (
         <OptionForm handleCreateOption={handleCreateOptions} />
       )}
       {options.length > 0 && (
         <div>
-          <div className="flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center gap-4">
             {options.map((option) => (
               <Option
                 key={option.id}
@@ -61,35 +61,37 @@ export default function AdminPage() {
               />
             ))}
           </div>
-          <div className="my-4">
-            <table className="table-auto border-collapse w-full">
-              <thead>
+          <div className="my-8">
+            <table className="table-auto border-collapse w-full bg-white shadow-md rounded-lg overflow-hidden">
+              <thead className="bg-gray-200">
                 <tr>
-                  <th className="border px-4 py-2">Option</th>
-                  <th className="border px-4 py-2">Votes</th>
+                  <th className="border px-6 py-4 text-left">Option</th>
+                  <th className="border px-6 py-4 text-left">Votes</th>
                 </tr>
               </thead>
               <tbody>
                 {options.map((option) => (
-                  <tr key={option.id}>
-                    <td className="border px-4 py-2">{option.name}</td>
-                    <td className="border px-4 py-2">{option.votes}</td>
+                  <tr key={option.id} className="hover:bg-gray-100">
+                    <td className="border px-6 py-4">{option.name}</td>
+                    <td className="border px-6 py-4">{option.votes}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <button 
-              onClick={handleRefresh} 
-              className="bg-yellow-500 text-white rounded px-4 py-2 mt-2 hover:bg-yellow-700"
-            >
-              Refresh Vote Count
-            </button>
-            <button 
-              onClick={handleClearOptions} 
-              className="bg-red-500 text-white rounded px-4 py-2 mt-2 hover:bg-red-700"
-            >
-              Recreate Options
-            </button>
+            <div className="flex justify-center gap-4 mt-4">
+              <button 
+                onClick={handleRefresh} 
+                className="bg-yellow-500 text-white rounded px-6 py-2 hover:bg-yellow-600 transition-colors duration-200"
+              >
+                Refresh Vote Count
+              </button>
+              <button 
+                onClick={handleClearOptions} 
+                className="bg-red-500 text-white rounded px-6 py-2 hover:bg-red-600 transition-colors duration-200"
+              >
+                Recreate Options
+              </button>
+            </div>
           </div>
         </div>
       )}
